@@ -66,4 +66,4 @@ Zuora → Oracle → WorkSpan. WorkSpan's right link is hidden with `visibility:
 
 ## iOS / Mobile
 
-All pages include `viewport-fit=cover` in the viewport meta tag. The shared `nav` in `styles.css` uses `padding: env(safe-area-inset-top) var(--gutter) 0` to clear the notch/Dynamic Island. On non-notch devices `env(safe-area-inset-top)` resolves to `0` with no side effects.
+This is a regular website (not a PWA), so the viewport meta tag uses the standard `width=device-width, initial-scale=1.0` and the nav does not compensate for the iOS notch / Dynamic Island — the browser's own chrome already reserves that space.

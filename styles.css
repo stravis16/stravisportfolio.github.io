@@ -40,15 +40,6 @@ nav {
   padding-bottom: 0;
   padding-left: var(--gutter);
 }
-/* Explicit block spacer for Dynamic Island / notch safe area.
-   Using a ::before block element rather than padding-top on the nav
-   avoids a WebKit compositing bug where backdrop-filter on a fixed
-   element causes env(safe-area-inset-top) padding to be ignored. */
-nav::before {
-  content: '';
-  display: block;
-  height: env(safe-area-inset-top);
-}
 .nav-inner {
   max-width: var(--max);
   margin: 0 auto;
