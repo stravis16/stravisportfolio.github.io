@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Steven Travis — VP of Design</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -448,7 +448,7 @@
       .nav-toggle { display: flex; }
       .nav-links {
         position: fixed;
-        top: 60px;
+        top: calc(60px + env(safe-area-inset-top));
         left: 0;
         right: 0;
         flex-direction: column;
