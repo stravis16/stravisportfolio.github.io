@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WorkSpan — Steven Travis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── CASE HERO ── */
+    .case-hero {
+      min-height: 55vh;
+      display: flex;
+      align-items: flex-end;
+      padding-top: 8rem;
+      padding-bottom: 5rem;
+      background: var(--paper);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .case-hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .case-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 780px;
+      margin-bottom: 3rem;
+    }
+    .case-hero-title em { font-style: italic; color: var(--accent); }
+    .case-stat-strip {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .case-stat {
+      padding-right: 3rem;
+      margin-right: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+    .case-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .case-stat-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .case-stat-num span { color: var(--accent); }
+    .case-stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 0.3rem;
+    }
+
+    /* ── SITUATION ── */
+    #situation {
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+    }
+    .situation-body {
+      max-width: 720px;
+    }
+    .situation-lead {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .situation-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1.25rem;
+    }
+    .pull-quote {
+      border-left: 2px solid var(--accent);
+      padding: 1.25rem 1.75rem;
+      margin: 3rem 0;
+      max-width: 620px;
+    }
+    .pull-quote p {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--ink) !important;
+      margin: 0 !important;
+    }
+
+    /* ── ROLE ── */
+    #role { background: var(--paper-warm); }
+    .role-grid {
+      display: grid;
+      grid-template-columns: 55% 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .role-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1.25rem;
+    }
+    .role-body p:first-child {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .role-image-wrap {
+      position: relative;
+    }
+    .role-image-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--rule);
+      z-index: 0;
+    }
+    .role-image {
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── DECISIONS ── */
+    #decisions { background: var(--paper); }
+    .decisions-list {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .decision-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 3rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .decision-item.has-thumb { grid-template-columns: 80px 350px 1fr; align-items: start; }
+    .decision-item:last-child { border-bottom: 1px solid var(--rule); }
+    .decision-thumb {
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--rule);
+      background: var(--paper-warm);
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      font: inherit;
+      color: inherit;
+    }
+    .decision-thumb:hover { transform: translateY(-2px); }
+    .decision-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .decision-thumb img { width: 100%; height: auto; display: block; }
+    .decision-num {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+      padding-top: 0.3rem;
+    }
+    .decision-title {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .decision-body p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+    .decision-body p:last-child { margin-bottom: 0; }
+
+    /* ── OUTCOME ── */
+    #outcome { background: var(--ink); color: var(--paper); }
+    #outcome .section-label { color: var(--accent); }
+    #outcome .section-title { color: var(--paper); }
+    .outcome-metrics {
+      display: flex;
+      gap: 0;
+      margin: 4rem 0;
+      flex-wrap: wrap;
+    }
+    .outcome-metric {
+      padding-right: 4rem;
+      margin-right: 4rem;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .outcome-metric:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .outcome-metric-num {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+    .outcome-metric-num span { color: var(--accent); }
+    .outcome-metric-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,245,242,0.5);
+      margin-top: 0.5rem;
+    }
+    .outcome-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(247,245,242,0.7);
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+    }
+    .outcome-quote {
+      border-left: 2px solid var(--accent);
+      padding: 1.25rem 1.75rem;
+      margin-top: 3rem;
+    }
+    .outcome-quote p {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--paper) !important;
+      max-width: 620px;
+    }
+
+    /* ── CASE NAV ── */
+    .case-nav {
+      background: var(--paper-warm);
+      padding: 3rem var(--gutter);
+      border-top: 1px solid var(--rule);
+    }
+    .case-nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .case-nav-link {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .case-nav-link:hover { color: var(--accent); }
+    .case-nav-center {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .case-nav-center:hover { color: var(--ink); }
+
+    /* ── IMAGE MODAL ── */
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 24, 20, 0.92);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 2rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .image-modal.open { display: flex; opacity: 1; }
+    .image-modal img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .image-modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--paper);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .image-modal-close:hover { background: rgba(255, 255, 255, 0.25); }
+    body.modal-open { overflow: hidden; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .role-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .decision-item { grid-template-columns: 40px 1fr; gap: 1.5rem; }
+      .decision-item.has-thumb { grid-template-columns: 1fr; gap: 1.25rem; }
+      .decision-thumb { max-width: 360px; }
+      .case-stat { padding-right: 1.5rem; margin-right: 1.5rem; }
+      .outcome-metric { padding-right: 2rem; margin-right: 2rem; }
+      .case-nav-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Steven Travis</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#philosophy">Philosophy</a></li>
+        <li><a href="index.html#writing">Writing</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="case-hero">
+    <div class="container">
+      <a href="index.html#work" class="back-link">← All Work</a>
+      <p class="case-hero-eyebrow">Head of User Experience &nbsp;·&nbsp; 2019 – 2021 &nbsp;·&nbsp; Foster City, CA</p>
+      <h1 class="case-hero-title">Reframing a Fragmented Product Into a <em>Unified Platform</em></h1>
+      <div class="case-stat-strip">
+        <div class="case-stat">
+          <div class="case-stat-num">30<span>%</span></div>
+          <div class="case-stat-label">Time on Task Improvement</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">1</div>
+          <div class="case-stat-label">Design System Shipped</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">4</div>
+          <div class="case-stat-label">Designers</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">2</div>
+          <div class="case-stat-label">Years</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITUATION -->
+  <section id="situation">
+    <div class="container">
+      <p class="section-label reveal">The Situation</p>
+      <div class="situation-body">
+        <p class="situation-lead reveal">WorkSpan was a cloud-based partner ecosystem platform — a genuinely novel product category helping companies co-sell and co-market across organizational boundaries. The technology was innovative, but the user experience told a different story.</p>
+        <p class="reveal">The product had been built through several iterative development cycles, each leaving behind its own interaction patterns, navigation logic, and design conventions. The result was an app that felt like three or four different products stitched together — confusing to new users and frustrating to experienced ones.</p>
+        <p class="reveal">When I joined as Head of UX, the mandate was clear: unify the experience, establish a design foundation, and make the product something users actually wanted to come back to.</p>
+        <div class="pull-quote reveal">
+          <p>Knowing what not to do first is as important as knowing what to do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLE -->
+  <section id="role">
+    <div class="container">
+      <p class="section-label reveal">My Role &amp; What I Was Working With</p>
+      <h2 class="section-title reveal">Player-Coach at an<br>Early-Stage Company.</h2>
+      <div class="role-grid">
+        <div class="role-body">
+          <p class="reveal">I led a team of four — including myself as a player-coach, designing alongside the team while setting strategy and direction. This is a mode I'm comfortable in at early-stage companies: the work doesn't wait for headcount, and staying close to the craft makes you a better leader of it.</p>
+          <p class="reveal">The team worked in close collaboration with Product and Engineering throughout. One of the early wins I'm most proud of was getting Engineering genuinely excited about the design system — not just compliant with it. More on that below.</p>
+        </div>
+        <div class="reveal">
+          <div class="role-image-wrap">
+            <img src="images/Workspan/Home.png" alt="WorkSpan — Home view" class="role-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section id="decisions">
+    <div class="container">
+      <p class="section-label reveal">The Work</p>
+      <h2 class="section-title reveal">The decisions that shaped<br>the outcome.</h2>
+      <div class="decisions-list">
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">01</div>
+          <button type="button" class="decision-thumb" data-full="images/Workspan/Home.png" aria-label="Open full-size image">
+            <img src="images/Workspan/Home.png" alt="WorkSpan Home" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Starting with research, not assumptions.</h3>
+            <p>Before touching a single screen, I led an exhaustive user research study across 25 users — 23 from 8 external customer organizations and 2 from our internal team, who were also active product users. I had the team categorize findings into broken journeys, navigation confusion, bugs, and things that were actually working. The "what's working" category mattered as much as the problems — it told us what not to break.</p>
+          </div>
+        </div>
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">02</div>
+          <button type="button" class="decision-thumb" data-full="images/Workspan/Reports.png" aria-label="Open full-size image">
+            <img src="images/Workspan/Reports.png" alt="WorkSpan Reports" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Anchoring design to company goals, not just user complaints.</h3>
+            <p>Research findings are only useful if they're prioritized against something. I led the team through a UX strategy exercise to define the goals that would drive the first iteration of the redesign. We landed on four: Reduce Confusion, Simplify Journeys, Reduce Cognitive Load, and Guided Flows. Onboarding and self-service were real problems too, but we made a deliberate call to defer them to a second iteration. Knowing what not to do first is as important as knowing what to do.</p>
+          </div>
+        </div>
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">03</div>
+          <button type="button" class="decision-thumb" data-full="images/Workspan/Sales_Plan.png" aria-label="Open full-size image">
+            <img src="images/Workspan/Sales_Plan.png" alt="WorkSpan Sales Plan" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Building a design system Engineering actually wanted.</h3>
+            <p>The fragmented UX wasn't just a design problem — it was a codebase problem. Inconsistent patterns had been implemented independently across the product, meaning every fix created maintenance debt. My position was clear: no designer could introduce a new pattern without pitching it to the team first, and if accepted, it went into the system. Equally important, no engineer would implement a one-off component outside the shared library.</p>
+            <p>What surprised me — and shouldn't have — was how enthusiastically Engineering embraced this. They were tired of maintaining divergent code as much as we were tired of designing around it. That shared frustration became shared ownership, and the component library became a genuine cross-functional asset.</p>
+          </div>
+        </div>
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">04</div>
+          <button type="button" class="decision-thumb" data-full="images/Workspan/Table_View.png" aria-label="Open full-size image">
+            <img src="images/Workspan/Table_View.png" alt="WorkSpan Table View" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Choosing "Fresh yet Familiar" over creative differentiation.</h3>
+            <p>One of the more contested design decisions was the visual and interaction direction. Some stakeholders — particularly on the sales side — saw the redesign as an opportunity to build something bold and distinctive. I pushed back, and the reasoning was grounded in user psychology rather than aesthetic preference.</p>
+            <p>WorkSpan integrated deeply with CRM and ERP tools that users lived in every day. Straying too far from those interaction patterns would add cognitive load exactly where we needed to reduce it. Jacob's Law is relevant here: users spend most of their time in other products and arrive with strong mental models already formed. Our job was to feel immediately familiar while elevating the quality of the experience — what we called "Fresh yet Familiar."</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOME -->
+  <section id="outcome">
+    <div class="container">
+      <p class="section-label reveal">The Outcome</p>
+      <h2 class="section-title reveal">A product users wanted<br>to come back to.</h2>
+      <div class="outcome-metrics reveal">
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">30<span>%</span></div>
+          <div class="outcome-metric-label">Time on Task Improvement</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">25</div>
+          <div class="outcome-metric-label">Users Researched</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">1</div>
+          <div class="outcome-metric-label">Design System Shipped</div>
+        </div>
+      </div>
+      <div class="outcome-body">
+        <p class="reveal">The redesigned product launched to measurably positive results. On tasks centered around finding and acting on objects in task lists — a core daily workflow — time-to-completion improved by 25–30%. That's not a small number for a B2B tool that people use for hours every day; it compounds into real productivity gains across a customer's entire partner team.</p>
+        <p class="reveal">Beyond the metrics, we shipped a unified design system with a fully accessible component library that both design and engineering teams used as their source of truth — a foundation the product could grow on rather than accumulate more debt against.</p>
+      </div>
+      <div class="outcome-quote reveal">
+        <p>Users spend most of their time in other products and arrive with strong mental models already formed. Our job was to feel immediately familiar while elevating the quality of the experience.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="case-nav">
+    <div class="case-nav-inner">
+      <a href="oracle.html" class="case-nav-link">← Oracle</a>
+      <a href="index.html#work" class="case-nav-center">All Work</a>
+      <span class="case-nav-link" style="visibility:hidden;">→</span>
+    </div>
+  </nav>
+
+  <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button type="button" class="image-modal-close" aria-label="Close image preview">×</button>
+    <img src="" alt="">
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    const modal = document.getElementById('image-modal');
+    const modalImg = modal.querySelector('img');
+    const modalClose = modal.querySelector('.image-modal-close');
+    const openModal = (src, alt) => {
+      modalImg.src = src;
+      modalImg.alt = alt || '';
+      modal.classList.add('open');
+      document.body.classList.add('modal-open');
+    };
+    const closeModal = () => {
+      modal.classList.remove('open');
+      document.body.classList.remove('modal-open');
+      modalImg.src = '';
+    };
+    document.querySelectorAll('.decision-thumb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.full || btn.querySelector('img').src;
+        const alt = btn.querySelector('img').alt;
+        openModal(src, alt);
+      });
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  </script>
+</body>
+</html>

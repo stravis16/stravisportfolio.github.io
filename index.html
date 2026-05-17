@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Steven Travis — VP of Design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 8rem;
+      padding-bottom: 6rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero-name-row {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-below { width: 100%; }
+    .hero-portrait-wrap {
+      position: relative;
+      flex-shrink: 0;
+      width: clamp(140px, 18vw, 220px);
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+      margin-bottom: 0.5rem;
+    }
+    .hero-portrait-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      right: -8px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--rule);
+      z-index: 0;
+    }
+    .hero-portrait {
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+      filter: contrast(1.05);
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 500;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-name em { font-style: italic; color: var(--accent); }
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+      font-weight: 500;
+      line-height: 1.45;
+      color: var(--ink);
+      max-width: 680px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.65s forwards;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--rule);
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 0.3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--ink); color: var(--paper); }
+    #about .section-label { color: var(--accent); }
+    #about .section-title { color: var(--paper); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+    .about-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(247,245,242,0.75);
+      margin-bottom: 1.25rem;
+    }
+    .about-body p:first-child {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--paper);
+    }
+    .about-callout {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .about-callout-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .about-callout-text {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--paper);
+      font-style: italic;
+    }
+
+    /* ── WORK ── */
+    #work { background: var(--paper); }
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .case-studies { display: flex; flex-direction: column; gap: 0; }
+    .case-study {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 3rem 0;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: background 0.2s;
+    }
+    .case-study:last-child { border-bottom: 1px solid var(--rule); }
+    .case-study:hover .case-title { color: var(--accent); }
+    .case-num {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+      padding-top: 0.2rem;
+    }
+    .case-study.has-thumb { grid-template-columns: 80px 220px 1fr auto; }
+    .case-thumb {
+      position: relative;
+      width: 100%;
+      border: 1px solid var(--rule);
+      overflow: hidden;
+      background: var(--paper-warm);
+    }
+    .case-thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .case-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+    .case-title {
+      font-family: var(--serif);
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      transition: color 0.2s;
+    }
+    .case-desc {
+      font-size: 0.92rem;
+      color: var(--ink-light);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .case-metric {
+      text-align: right;
+      min-width: 120px;
+      padding-top: 0.2rem;
+    }
+    .metric-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 500;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .metric-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-top: 0.25rem;
+    }
+
+    /* ── PHILOSOPHY ── */
+    #philosophy { background: var(--paper-warm); }
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin-top: 4rem;
+    }
+    .phil-card {
+      background: var(--paper);
+      padding: 2.5rem;
+      transition: background 0.2s;
+    }
+    .phil-card:hover { background: white; }
+    .phil-num {
+      font-family: var(--serif);
+      font-size: 3rem;
+      font-weight: 500;
+      color: var(--accent-light);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .phil-title {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      color: var(--ink);
+    }
+    .phil-body {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      line-height: 1.75;
+    }
+
+    /* ── WRITING ── */
+    #writing { background: var(--paper); }
+    .writing-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .substack-intro {
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      max-width: 340px;
+      line-height: 1.65;
+    }
+    .articles { display: flex; flex-direction: column; gap: 0; }
+    .article {
+      display: grid;
+      grid-template-columns: 40px 1fr auto;
+      gap: 1.5rem;
+      align-items: center;
+      padding: 1.75rem 0;
+      border-top: 1px solid var(--rule);
+      text-decoration: none;
+      color: var(--ink);
+      transition: opacity 0.2s;
+    }
+    .article:last-child { border-bottom: 1px solid var(--rule); }
+    .article:hover { opacity: 0.7; }
+    .art-num {
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+    }
+    .art-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+    .art-sub { font-size: 0.8rem; color: var(--ink-light); }
+    .art-arrow {
+      font-size: 1rem;
+      color: var(--ink-faint);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .article:hover .art-arrow { transform: translateX(4px); color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink); text-align: center; }
+    #contact .section-label { color: var(--accent); }
+    .contact-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 500;
+      line-height: 1.1;
+      color: var(--paper);
+      margin: 1.5rem auto 2rem;
+      max-width: 700px;
+    }
+    .contact-headline em { font-style: italic; color: var(--accent); }
+    .contact-body {
+      font-size: 1rem;
+      color: rgba(247,245,242,0.6);
+      max-width: 480px;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem var(--gutter);
+      text-align: center;
+    }
+    .footer-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(247,245,242,0.3);
+      letter-spacing: 0.05em;
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      font-size: 0.75rem;
+      color: rgba(247,245,242,0.4);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--paper); }
+
+    /* ── NAV TOGGLE (hamburger) ── */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 0;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      padding: 6px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--ink);
+      transition: transform 0.25s ease, opacity 0.2s ease;
+      transform-origin: center;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-stats { gap: 2rem; margin-top: 3.5rem; padding-top: 2rem; }
+      .work-header, .writing-header { flex-direction: column; align-items: flex-start; }
+      .about-grid { gap: 3.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 4rem var(--gutter); }
+      #hero {
+        padding-top: 6rem;
+        padding-bottom: 4rem;
+        min-height: auto;
+      }
+      .nav-toggle { display: flex; }
+      .nav-links {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(247, 245, 242, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--rule);
+        padding: 0.5rem var(--gutter) 1rem;
+        transform: translateY(-110%);
+        transition: transform 0.25s ease;
+        pointer-events: none;
+      }
+      .nav-links.open {
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .nav-links a {
+        display: block;
+        padding: 0.85rem 0;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--rule);
+      }
+      .nav-links li:last-child a { border-bottom: 0; }
+      .hero-name-row { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+      .hero-portrait-wrap { width: 160px; }
+      .hero-stats {
+        gap: 1.5rem 2rem;
+        margin-top: 2.5rem;
+        padding-top: 2rem;
+      }
+      .stat-num { font-size: 2.2rem; }
+      .hero-ctas { width: 100%; }
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-secondary { flex: 1 1 auto; text-align: center; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-callout { margin-bottom: 1.75rem; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .phil-card { padding: 1.75rem; }
+      .case-study { grid-template-columns: 40px 1fr; }
+      .case-study.has-thumb { grid-template-columns: 1fr; gap: 1.25rem; }
+      .case-thumb { max-width: 360px; }
+      .case-metric { display: none; }
+      .article {
+        grid-template-columns: 32px 1fr auto;
+        gap: 1rem;
+        padding: 1.25rem 0;
+      }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      :root { --gutter: 1.25rem; }
+      .hero-stats { gap: 1.25rem 1.75rem; }
+      .stat { min-width: 45%; }
+      .hero-ctas { flex-direction: column; align-items: stretch; }
+      .contact-links { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+      .contact-links a { width: 100%; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">Steven Travis</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="primary-nav">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#philosophy">Philosophy</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <p class="hero-eyebrow">VP of Design &nbsp;·&nbsp; User Experience Executive</p>
+        <div class="hero-name-row">
+          <h1 class="hero-name">Steven<br><em>Travis</em></h1>
+          <div class="hero-portrait-wrap">
+            <img src="Pencil_headshot.png" alt="Steven Travis" class="hero-portrait">
+          </div>
+        </div>
+        <div class="hero-below">
+          <p class="hero-tagline">I build design-first cultures that turn complex products into competitive advantages.</p>
+          <p class="hero-sub">For 25 years I've helped companies see design not as a layer applied at the end of the process, but as a strategic driver of customer acquisition, retention, and growth.</p>
+          <div class="hero-ctas">
+            <a href="#work" class="btn-primary">View My Work</a>
+            <a href="#contact" class="btn-secondary">Get In Touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat">
+              <div class="stat-num">25<span>+</span></div>
+              <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">30<span>%</span></div>
+              <div class="stat-label">NPS Improvement at Zuora</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">18</div>
+              <div class="stat-label">Designers Led Globally</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">3</div>
+              <div class="stat-label">Design Systems Built</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label reveal">About</p>
+      <h2 class="section-title reveal">I didn't set out to be<br>a design executive.</h2>
+      <div class="about-grid">
+        <div class="about-body reveal">
+          <p>I set out to fix broken products.</p>
+          <p>Early in my career I noticed a pattern: the most frustrating software wasn't poorly engineered. It was well-engineered but poorly understood by the people who built it. Features were designed for the roadmap, not the user. And design was treated as something you applied at the end, like paint.</p>
+          <p>Fixing that problem turned out to require more than design skills. It required changing how organizations think.</p>
+          <p>That's been my work ever since. At Responsys I rebuilt a UX practice from scratch, turning design into a competitive differentiator that Oracle noticed. At WorkSpan I unified a fragmented product experience and built the design system that gave the platform a foundation to grow on. At Zuora I joined as the first Head of Design in company history, inherited a team of two, and spent four years building a 14-person global organization and a culture where product and engineering treat design as a partner from day one.</p>
+          <p>My approach has always been wholistic. I don't separate the craft from the strategy, the team from the work, or the user experience from the business outcome.</p>
+          <p>I'm looking for my next challenge. If you're building something complex and believe design can be a genuine competitive advantage, I'd like to talk.</p>
+        </div>
+        <div class="about-aside reveal">
+          <div class="about-callout">
+            <p class="about-callout-label">Currently</p>
+            <p class="about-callout-text">"Getting ahead of the AI shift rather than waiting for it to land — building agentic design tooling, getting my team coding, and developing a point of view on what the discipline looks like in five years."</p>
+          </div>
+          <div class="about-callout">
+            <p class="about-callout-label">Teaching</p>
+            <p class="about-callout-text">"Product and UX design at a Bay Area college — rethinking the curriculum for the AI era."</p>
+          </div>
+          <div class="about-callout">
+            <p class="about-callout-label">Writing</p>
+            <p class="about-callout-text">"Design strategy, leadership, and the real work of building for AI — minus the hype."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="container">
+      <div class="work-header">
+        <div>
+          <p class="section-label reveal">Selected Work</p>
+          <h2 class="section-title reveal">Case Studies</h2>
+        </div>
+        <p class="section-intro reveal" style="font-size:0.88rem; max-width:360px;">Each project is a leadership story as much as a design story — strategy, organization, and craft in equal measure.</p>
+      </div>
+      <div class="case-studies">
+
+        <a href="zuora.html" class="case-study has-thumb reveal">
+          <div class="case-num">01</div>
+          <div class="case-thumb">
+            <img src="images/Zuora_Screens/Occam_Screenshot.png" alt="Occam — Zuora's Design System" loading="lazy">
+          </div>
+          <div class="case-body">
+            <div class="case-tags">
+              <span class="tag">Design Culture</span>
+              <span class="tag">Design Systems</span>
+              <span class="tag">AI Strategy</span>
+            </div>
+            <h3 class="case-title">Zuora — Building a Design-First Culture from the Ground Up</h3>
+            <p class="case-desc">Joined as Zuora's first Head of Design. Inherited two designers, an engineering-first culture, and a fragmented product suite. Built a 14-person global team, launched the Occam Design System, and drove a 30% NPS improvement — all while pioneering agentic design tooling for the AI era.</p>
+          </div>
+          <div class="case-metric">
+            <div class="metric-num">30%</div>
+            <div class="metric-label">NPS Improvement</div>
+          </div>
+        </a>
+
+        <a href="oracle.html" class="case-study has-thumb reveal">
+          <div class="case-num">02</div>
+          <div class="case-thumb">
+            <img src="images/Responsys_oracle/contacts.png" alt="Oracle Responsys — Contacts" loading="lazy">
+          </div>
+          <div class="case-body">
+            <div class="case-tags">
+              <span class="tag">Org Design</span>
+              <span class="tag">Acquisition Integration</span>
+              <span class="tag">Design Systems</span>
+            </div>
+            <h3 class="case-title">Oracle Marketing Cloud — Unifying Five Acquired Products into One Suite</h3>
+            <p class="case-desc">Led 18 designers across 4 countries following Oracle's acquisition of Responsys. Turned five competing design languages into a unified suite — reversing a product reputation from top churn driver to top purchase reason — by solving organizational problems with organizational solutions.</p>
+          </div>
+          <div class="case-metric">
+            <div class="metric-num">18</div>
+            <div class="metric-label">Designers, 4 Countries</div>
+          </div>
+        </a>
+
+        <a href="workspan.html" class="case-study has-thumb reveal">
+          <div class="case-num">03</div>
+          <div class="case-thumb">
+            <img src="images/Workspan/Home.png" alt="WorkSpan — Home" loading="lazy">
+          </div>
+          <div class="case-body">
+            <div class="case-tags">
+              <span class="tag">Zero-to-One</span>
+              <span class="tag">Research</span>
+              <span class="tag">Design Systems</span>
+            </div>
+            <h3 class="case-title">WorkSpan — Reframing a Fragmented Product into a Unified Platform</h3>
+            <p class="case-desc">Unified a product built from three inconsistent development eras into a coherent platform. Led user research with 25 participants across 8 customers, built a design system Engineering actually wanted, and improved task completion time by 25–30% — guided by the principle of "Fresh yet Familiar."</p>
+          </div>
+          <div class="case-metric">
+            <div class="metric-num">30%</div>
+            <div class="metric-label">Faster Task Completion</div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="philosophy">
+    <div class="container">
+      <p class="section-label reveal">How I Lead</p>
+      <h2 class="section-title reveal">Leadership Philosophy</h2>
+      <p class="section-intro reveal">Design leadership is an organizational challenge as much as a creative one. A design team can have exceptional talent and still produce nothing of consequence if the conditions around it aren't right.</p>
+      <div class="philosophy-grid">
+        <div class="phil-card reveal">
+          <div class="phil-num">01</div>
+          <h3 class="phil-title">Earn trust before you change things</h3>
+          <p class="phil-body">When I join a new organization, my first instinct is never to impose. It's to understand. I find the quick win that demonstrates what design-led thinking can produce, and use that credibility to open the door to harder, deeper work. You can't mandate a design-first culture. You have to build toward it from shared recognition.</p>
+        </div>
+        <div class="phil-card reveal">
+          <div class="phil-num">02</div>
+          <h3 class="phil-title">Solve organizational problems with organizational solutions</h3>
+          <p class="phil-body">Some of the most important design decisions I've made had nothing to do with pixels. Design strategy and people strategy are the same thing. If you're only thinking about the work and not the organization around it, you're solving half the problem.</p>
+        </div>
+        <div class="phil-card reveal">
+          <div class="phil-num">03</div>
+          <h3 class="phil-title">Stay close to the craft</h3>
+          <p class="phil-body">I've led teams of 18 designers across four countries, and teams of four where I was designing alongside everyone else. In both modes, I've stayed as close to the work as the role allows. Staying close to the craft makes you a better critic, a better mentor, and a more credible voice in rooms full of engineers looking for any reason to discount design judgment.</p>
+        </div>
+        <div class="phil-card reveal">
+          <div class="phil-num">04</div>
+          <h3 class="phil-title">Hire for backbone and ownership, not just taste</h3>
+          <p class="phil-body">A designer with great taste but no voice gets rolled in the real world of competing roadmap priorities. I look for people who translate complex requirements into real design decisions, stay invested in outcomes not just deliverables, and can articulate design decisions clearly under pressure.</p>
+        </div>
+        <div class="phil-card reveal" style="grid-column: 1 / -1;">
+          <div class="phil-num">05</div>
+          <h3 class="phil-title">Lead into the uncertainty, don't wait for it to resolve</h3>
+          <p class="phil-body">The role of the product designer is changing faster right now than at any point in my career. AI coding tools are blurring the line between design and engineering. My answer is that design owns more than we think, if we move toward it rather than away from it. I've been building agentic design tooling, getting my team coding with Cursor and Claude Code, and working toward a world where product designers submit pull requests — not redlines. The handoff problem doesn't get solved by better documentation. It gets solved by collapsing the distance between the two disciplines entirely.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WRITING -->
+  <section id="writing">
+    <div class="container">
+      <div class="writing-header">
+        <div>
+          <p class="section-label reveal">Writing</p>
+          <h2 class="section-title reveal">On Design, Leadership<br>&amp; What Comes Next</h2>
+        </div>
+        <div class="substack-intro reveal">
+          <p>Writing about design strategy, leadership, and the real work of building for AI — minus the hype.</p>
+          <a href="https://steventravisdesign.substack.com" target="_blank" rel="noopener" style="display:inline-block; margin-top:1rem; font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); text-decoration:none; border-bottom:1px solid var(--accent-light); padding-bottom:2px;">Subscribe on Substack →</a>
+        </div>
+      </div>
+      <div class="articles">
+        <a href="https://steventravisdesign.substack.com/p/ai-killed-the-design-star-not" target="_blank" rel="noopener" class="article reveal">
+          <span class="art-num">01</span>
+          <div class="art-body">
+            <div class="art-title">AI Killed the Design Star... Only Not Really</div>
+            <div class="art-sub">Or How I Learned to Love the Agent &nbsp;·&nbsp; Apr 2026</div>
+          </div>
+          <span class="art-arrow">→</span>
+        </a>
+        <a href="https://steventravisdesign.substack.com/p/so-you-want-to-build-a-design-team" target="_blank" rel="noopener" class="article reveal">
+          <span class="art-num">02</span>
+          <div class="art-body">
+            <div class="art-title">So You Want to Build a Design Team in 2026...</div>
+            <div class="art-sub">The evolving designer skillset &nbsp;·&nbsp; Apr 2026</div>
+          </div>
+          <span class="art-arrow">→</span>
+        </a>
+        <a href="https://steventravisdesign.substack.com/p/is-the-design-process-dead-was-it" target="_blank" rel="noopener" class="article reveal">
+          <span class="art-num">03</span>
+          <div class="art-body">
+            <div class="art-title">Is the Design Process Dead? Was it Ever Alive?</div>
+            <div class="art-sub">On taste, craft, and agentic design &nbsp;·&nbsp; Apr 2026</div>
+          </div>
+          <span class="art-arrow">→</span>
+        </a>
+        <a href="https://steventravisdesign.substack.com/p/to-those-for-whom-the-future-seems" target="_blank" rel="noopener" class="article reveal">
+          <span class="art-num">04</span>
+          <div class="art-body">
+            <div class="art-title">To Those for Whom the Future Seems Scary</div>
+            <div class="art-sub">On navigating disruption &nbsp;·&nbsp; Apr 2026</div>
+          </div>
+          <span class="art-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label reveal">Let's Talk</p>
+      <h2 class="contact-headline reveal">Interested in working<br><em>together?</em></h2>
+      <p class="contact-body reveal">If you're building something complex and believe design can be a genuine competitive advantage, I'd like to hear about it.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:stravis16@gmail.com" class="btn-primary">Send an Email</a>
+        <a href="https://linkedin.com/in/steventravis/" target="_blank" rel="noopener" class="btn-secondary" style="border-color:rgba(247,245,242,0.3); color:var(--paper);">View LinkedIn</a>
+        <a href="https://steventravisdesign.substack.com" target="_blank" rel="noopener" class="btn-secondary" style="border-color:rgba(247,245,242,0.3); color:var(--paper);">Read Substack</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 Steven Travis. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="mailto:stravis16@gmail.com">Email</a>
+        <a href="https://linkedin.com/in/steventravis/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://steventravisdesign.substack.com" target="_blank" rel="noopener">Substack</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navList = document.getElementById('primary-nav');
+    navToggle.addEventListener('click', () => {
+      const open = navList.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    navList.addEventListener('click', e => {
+      if (e.target.tagName === 'A') {
+        navList.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--ink)' : '';
+      });
+    });
+  </script>
+</body>
+</html>

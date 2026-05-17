@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oracle Marketing Cloud — Steven Travis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* ── CASE HERO ── */
+    .case-hero {
+      min-height: 55vh;
+      display: flex;
+      align-items: flex-end;
+      padding-top: 8rem;
+      padding-bottom: 5rem;
+      background: var(--paper);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      margin-bottom: 3rem;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .case-hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .case-hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 780px;
+      margin-bottom: 3rem;
+    }
+    .case-hero-title em { font-style: italic; color: var(--accent); }
+    .case-stat-strip {
+      display: flex;
+      gap: 0;
+      border-top: 1px solid var(--rule);
+      padding-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .case-stat {
+      padding-right: 3rem;
+      margin-right: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+    .case-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .case-stat-num {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .case-stat-num span { color: var(--accent); }
+    .case-stat-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-top: 0.3rem;
+    }
+
+    /* ── SITUATION ── */
+    #situation {
+      background: var(--paper);
+      border-top: 1px solid var(--rule);
+    }
+    .situation-body {
+      max-width: 720px;
+    }
+    .situation-lead {
+      font-family: var(--serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      line-height: 1.55;
+      color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .situation-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1.25rem;
+    }
+    .pull-quote {
+      border-left: 2px solid var(--accent);
+      padding: 1.25rem 1.75rem;
+      margin: 3rem 0;
+      max-width: 620px;
+    }
+    .pull-quote p {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--ink) !important;
+      margin: 0 !important;
+    }
+
+    /* ── ROLE ── */
+    #role { background: var(--paper-warm); }
+    .role-grid {
+      display: grid;
+      grid-template-columns: 55% 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+    .role-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1.25rem;
+    }
+    .role-body p:first-child {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+    .role-image-wrap {
+      position: relative;
+    }
+    .role-image-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      right: -10px;
+      width: 100%;
+      height: 100%;
+      border: 1px solid var(--rule);
+      z-index: 0;
+    }
+    .role-image {
+      width: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── DECISIONS ── */
+    #decisions { background: var(--paper); }
+    .decisions-list {
+      margin-top: 4rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .decision-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 2rem;
+      padding: 3rem 0;
+      border-top: 1px solid var(--rule);
+    }
+    .decision-item.has-thumb { grid-template-columns: 80px 350px 1fr; align-items: start; }
+    .decision-item:last-child { border-bottom: 1px solid var(--rule); }
+    .decision-thumb {
+      width: 100%;
+      padding: 0;
+      border: 1px solid var(--rule);
+      background: var(--paper-warm);
+      cursor: zoom-in;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      font: inherit;
+      color: inherit;
+    }
+    .decision-thumb:hover { transform: translateY(-2px); }
+    .decision-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .decision-thumb img { width: 100%; height: auto; display: block; }
+    .decision-num {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink-faint);
+      padding-top: 0.3rem;
+    }
+    .decision-title {
+      font-family: var(--serif);
+      font-size: clamp(1.2rem, 2vw, 1.6rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .decision-body p {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: var(--ink-light);
+      margin-bottom: 1rem;
+    }
+    .decision-body p:last-child { margin-bottom: 0; }
+
+    /* ── OUTCOME ── */
+    #outcome { background: var(--ink); color: var(--paper); }
+    #outcome .section-label { color: var(--accent); }
+    #outcome .section-title { color: var(--paper); }
+    .outcome-metrics {
+      display: flex;
+      gap: 0;
+      margin: 4rem 0;
+      flex-wrap: wrap;
+    }
+    .outcome-metric {
+      padding-right: 4rem;
+      margin-right: 4rem;
+      border-right: 1px solid rgba(255,255,255,0.12);
+    }
+    .outcome-metric:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .outcome-metric-num {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--paper);
+    }
+    .outcome-metric-num span { color: var(--accent); }
+    .outcome-metric-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(247,245,242,0.5);
+      margin-top: 0.5rem;
+    }
+    .outcome-body p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(247,245,242,0.7);
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+    }
+    .outcome-quote {
+      border-left: 2px solid var(--accent);
+      padding: 1.25rem 1.75rem;
+      margin-top: 3rem;
+    }
+    .outcome-quote p {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      font-weight: 500;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--paper) !important;
+      max-width: 620px;
+    }
+
+    /* ── CASE NAV ── */
+    .case-nav {
+      background: var(--paper-warm);
+      padding: 3rem var(--gutter);
+      border-top: 1px solid var(--rule);
+    }
+    .case-nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .case-nav-link {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .case-nav-link:hover { color: var(--accent); }
+    .case-nav-center {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .case-nav-center:hover { color: var(--ink); }
+
+    /* ── IMAGE MODAL ── */
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 24, 20, 0.92);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem 2rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .image-modal.open { display: flex; opacity: 1; }
+    .image-modal img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+    .image-modal-close {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--paper);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s ease;
+    }
+    .image-modal-close:hover { background: rgba(255, 255, 255, 0.25); }
+    body.modal-open { overflow: hidden; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .role-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .decision-item { grid-template-columns: 40px 1fr; gap: 1.5rem; }
+      .decision-item.has-thumb { grid-template-columns: 1fr; gap: 1.25rem; }
+      .decision-thumb { max-width: 360px; }
+      .case-stat { padding-right: 1.5rem; margin-right: 1.5rem; }
+      .outcome-metric { padding-right: 2rem; margin-right: 2rem; }
+      .case-nav-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Steven Travis</a>
+      <ul class="nav-links">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#philosophy">Philosophy</a></li>
+        <li><a href="index.html#writing">Writing</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="case-hero">
+    <div class="container">
+      <a href="index.html#work" class="back-link">← All Work</a>
+      <p class="case-hero-eyebrow">Sr. Director, User Experience &nbsp;·&nbsp; 2012 – 2018 &nbsp;·&nbsp; Redwood Shores, CA</p>
+      <h1 class="case-hero-title">Building a <em>Unified Design Organization</em> Across Five Acquired Products</h1>
+      <div class="case-stat-strip">
+        <div class="case-stat">
+          <div class="case-stat-num">18</div>
+          <div class="case-stat-label">Designers Led</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">4</div>
+          <div class="case-stat-label">Countries</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">5</div>
+          <div class="case-stat-label">Products Unified</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">6</div>
+          <div class="case-stat-label">Years</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITUATION -->
+  <section id="situation">
+    <div class="container">
+      <p class="section-label reveal">The Situation</p>
+      <div class="situation-body">
+        <p class="situation-lead reveal">Oracle Marketing Cloud was Oracle's answer to the enterprise marketing automation market — a suite of products capable of orchestrating campaigns across email, push, SMS, and more, with deep personalization and targeting. At its scale, the platform sent over 300 billion messages annually and generated over $200M in recurring revenue globally.</p>
+        <p class="reveal">But the suite wasn't built — it was assembled. Five products, acquired at different times, from different companies, built on different front-end architectures, with five different design languages, navigation systems, and interaction models. For customers who used more than one product, the experience was jarring. For customers evaluating the platform, fragmented UX was one of the most frequently cited reasons for walking away.</p>
+        <p class="reveal">I came in before the Oracle acquisition, joining Responsys in 2011 when the UX situation there was already broken — a product largely built by engineers and "dressed up" by designers after the fact, shipped when time allowed. Over three years I rebuilt that practice from the ground up. When Oracle acquired Responsys to anchor the Marketing Cloud suite, I was asked to do the same thing at a much larger scale.</p>
+        <div class="pull-quote reveal">
+          <p>You can't impose consistency — you have to build toward it from shared recognition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLE -->
+  <section id="role">
+    <div class="container">
+      <p class="section-label reveal">My Role &amp; What I Was Working With</p>
+      <h2 class="section-title reveal">Leading 18 Designers<br>Across Four Countries.</h2>
+      <div class="role-grid">
+        <div class="role-body">
+          <p class="reveal">I was appointed to lead the combined UX organization across all five Marketing Cloud properties: Responsys, Eloqua, Maximizer, Data Cloud, and Social Marketing. That meant 18 designers across four countries — the US, Canada, India, and the UK — including three UX leads who came from the acquired companies and were now reporting to me.</p>
+          <p class="reveal">The reason I was asked to lead this effort was straightforward: Responsys had been acquired as the flagship of the suite, and by that point our design patterns were the most mature of any property in the group. Management wanted the suite built around those foundations. I was the only senior design leader who had both the design systems background and the organizational experience to run that kind of cross-team consolidation.</p>
+          <p class="reveal">What that also meant, practically, was that I was walking into teams with their own design identities, their own product loyalties, and their own engineering relationships — and asking them to give up their autonomy for the good of a suite they hadn't asked to be part of.</p>
+        </div>
+        <div class="reveal">
+          <div class="role-image-wrap">
+            <img src="images/Responsys_oracle/contacts.png" alt="Oracle Marketing Cloud — Contacts view" class="role-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECISIONS -->
+  <section id="decisions">
+    <div class="container">
+      <p class="section-label reveal">The Work</p>
+      <h2 class="section-title reveal">The decisions that shaped<br>the outcome.</h2>
+      <div class="decisions-list">
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">01</div>
+          <button type="button" class="decision-thumb" data-full="images/Responsys_oracle/campaign_designer.png" aria-label="Open full-size image">
+            <img src="images/Responsys_oracle/campaign_designer.png" alt="Campaign Designer" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Establishing the Responsys-era foundation first.</h3>
+            <p>Before the acquisition, the work at Responsys was its own significant effort. UX had been an afterthought — features were engineered first, then styled, then shipped whenever there was bandwidth. I hired strong designers, built a research and feedback practice, and systematically worked toward consistency across the product over multiple release cycles. We also introduced a highly visual campaign-building experience that simply hadn't existed before — a capability that would later become a differentiator for the entire suite.</p>
+            <p>By the time Oracle came calling, UX at Responsys had moved from the most complained-about aspect of the product to a competitive strength. That track record was the credibility I brought into the larger challenge.</p>
+          </div>
+        </div>
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">02</div>
+          <button type="button" class="decision-thumb" data-full="images/Responsys_oracle/campaign_Monitor.png" aria-label="Open full-size image">
+            <img src="images/Responsys_oracle/campaign_Monitor.png" alt="Campaign Monitor" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Finding common ground before imposing structure.</h3>
+            <p>With five fragmented products now in scope, the temptation would have been to mandate the Responsys design system immediately. I took a different approach: I started by running cross-team design sessions to map what the products actually had in common. Most had some form of WYSIWYG editor for building emails and landing pages. All had CRM integration configuration. Navigation differed on the surface, but the underlying information architecture was often more similar than the teams realized.</p>
+            <p>That mapping exercise did two things: it identified the genuine common ground that could anchor a shared system, and it gave the other teams a reason to engage rather than resist.</p>
+          </div>
+        </div>
+
+        <div class="decision-item has-thumb reveal">
+          <div class="decision-num">03</div>
+          <button type="button" class="decision-thumb" data-full="images/Responsys_oracle/rc118-responsys-screen-6.png" aria-label="Open full-size image">
+            <img src="images/Responsys_oracle/rc118-responsys-screen-6.png" alt="Responsys product screen" loading="lazy">
+          </button>
+          <div class="decision-body">
+            <h3 class="decision-title">Solving for look and feel before solving for architecture.</h3>
+            <p>The fragmented front-end architectures across the five products were a real constraint. Getting every team to rebuild components from scratch on a unified technical foundation wasn't realistic in the near term. So I made a deliberate sequencing decision: prioritize visual consistency first. Standardized color palette, icon set, typography, form layouts, navigation patterns — even if the underlying implementation varied slightly, users would experience a coherent suite. This approach let us move faster and show meaningful progress to product leadership without getting blocked by engineering complexity.</p>
+          </div>
+        </div>
+
+        <div class="decision-item reveal">
+          <div class="decision-num">04</div>
+          <div class="decision-body">
+            <h3 class="decision-title">Creating organizational structures to solve organizational problems.</h3>
+            <p>The hardest part of this effort wasn't the design work — it was getting the acquired engineering teams to adopt the new system at all. Management backing helped, but it wasn't sufficient. The real breakthrough was an organizational decision: I established a separate, dedicated UI team with no existing loyalty to any one product. Their sole mandate was to build out the new suite-level components and patterns.</p>
+            <p>This neutrality mattered. Teams that might have resisted adopting "Responsys patterns" were more willing to adopt components built by a team with no agenda. It removed the politics from the technical conversation.</p>
+          </div>
+        </div>
+
+        <div class="decision-item reveal">
+          <div class="decision-num">05</div>
+          <div class="decision-body">
+            <h3 class="decision-title">Keeping 18 designers aligned across four time zones.</h3>
+            <p>I ran twice-weekly virtual design reviews where designers presented work in progress before anything went to engineering. The goal was consistency enforcement without micromanagement — a shared checkpoint that caught divergence early. I also held weekly meetings with the three UX leads to track progress and coordinate at the organizational level, leaving day-to-day execution to them. That structure — close enough to catch problems, distributed enough to scale — let us maintain momentum without everything flowing through me.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOME -->
+  <section id="outcome">
+    <div class="container">
+      <p class="section-label reveal">The Outcome</p>
+      <h2 class="section-title reveal">UX went from the top reason customers left<br>to the top reason they stayed.</h2>
+      <div class="outcome-metrics reveal">
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">5</div>
+          <div class="outcome-metric-label">Products Unified</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">18</div>
+          <div class="outcome-metric-label">Designers Aligned</div>
+        </div>
+        <div class="outcome-metric">
+          <div class="outcome-metric-num">6</div>
+          <div class="outcome-metric-label">Years</div>
+        </div>
+      </div>
+      <div class="outcome-body">
+        <p class="reveal">The transformation in how customers perceived the UX was stark. Before this work began, user experience was among the most commonly cited reasons for churn. By the time the suite reached maturity, UX had become one of the top reasons customers chose Oracle Marketing Cloud over competitors. That's not an incremental improvement — it's a complete reversal of a product's competitive positioning, driven by design.</p>
+        <p class="reveal">The visual campaign-building experience introduced during the Responsys years became a hallmark feature of the suite. The shared design system, built through the neutral UI team and enforced through cross-team design reviews, gave 18 designers in four countries a common language and a common standard to work from.</p>
+      </div>
+      <div class="outcome-quote reveal">
+        <p>That's not an incremental improvement — it's a complete reversal of a product's competitive positioning, driven by design.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE NAVIGATION -->
+  <nav class="case-nav">
+    <div class="case-nav-inner">
+      <a href="zuora.html" class="case-nav-link">← Zuora</a>
+      <a href="index.html#work" class="case-nav-center">All Work</a>
+      <a href="workspan.html" class="case-nav-link">WorkSpan →</a>
+    </div>
+  </nav>
+
+  <div class="image-modal" id="image-modal" role="dialog" aria-modal="true" aria-label="Image preview">
+    <button type="button" class="image-modal-close" aria-label="Close image preview">×</button>
+    <img src="" alt="">
+  </div>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+
+    const modal = document.getElementById('image-modal');
+    const modalImg = modal.querySelector('img');
+    const modalClose = modal.querySelector('.image-modal-close');
+    const openModal = (src, alt) => {
+      modalImg.src = src;
+      modalImg.alt = alt || '';
+      modal.classList.add('open');
+      document.body.classList.add('modal-open');
+    };
+    const closeModal = () => {
+      modal.classList.remove('open');
+      document.body.classList.remove('modal-open');
+      modalImg.src = '';
+    };
+    document.querySelectorAll('.decision-thumb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.dataset.full || btn.querySelector('img').src;
+        const alt = btn.querySelector('img').alt;
+        openModal(src, alt);
+      });
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  </script>
+</body>
+</html>
