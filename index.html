@@ -290,9 +290,9 @@
       color: var(--ink);
     }
     .phil-body {
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       color: var(--ink-light);
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
     /* ── WRITING ── */
@@ -333,11 +333,14 @@
     }
     .art-title {
       font-family: var(--serif);
-      font-size: 1.1rem;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
       font-weight: 500;
-      margin-bottom: 0.2rem;
+      line-height: 1.2;
+      margin-bottom: 0.35rem;
+      transition: color 0.2s;
     }
-    .art-sub { font-size: 0.8rem; color: var(--ink-light); }
+    .article:hover .art-title { color: var(--accent); }
+    .art-sub { font-size: 0.92rem; color: var(--ink-light); line-height: 1.7; }
     .art-arrow {
       font-size: 1rem;
       color: var(--ink-faint);
