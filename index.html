@@ -441,7 +441,7 @@
     @media (max-width: 768px) {
       section { padding: 4rem var(--gutter); }
       #hero {
-        padding-top: 6rem;
+        padding-top: calc(5rem + env(safe-area-inset-top));
         padding-bottom: 4rem;
         min-height: auto;
       }

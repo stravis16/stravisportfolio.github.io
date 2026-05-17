@@ -23,29 +23,47 @@ Vanilla HTML/CSS/JS — no build tools, no frameworks, no dependencies.
 - Fonts: `--serif` (Cormorant Garamond), `--sans` (DM Sans)
 - Layout: `--max` (1100px), `--gutter`
 
+## Typography Rules
+
+- All `font-weight` values are ≥ 500 throughout the codebase.
+- Google Fonts loaded per-page (not in `styles.css`): `Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500` and `DM+Sans:wght@500;700`.
+- `.section-label` (in `styles.css`): `font-size: 18px`, accent colour, uppercase — used as the standard eyebrow label across all sections and pages.
+- Body copy uses DM Sans at 0.92rem / line-height 1.7 (`--ink-light`). The `.role-body p:first-child` override has been removed — all paragraphs in role and situation sections share the same style.
+
+## Homepage (`index.html`) Structure
+
+- **Hero**: animated fade-in, hamburger nav on mobile (≤768px), `viewport-fit=cover` for iOS safe area.
+- **Selected Work** (case study list): `.case-study` rows use `grid-template-columns: 80px 1fr auto`. Zuora and Oracle and WorkSpan rows use the `.has-thumb` modifier (`grid-template-columns: 80px 220px 1fr auto`) to add a screenshot thumbnail.
+- **About**, **Philosophy**, **Writing**, **Contact** sections follow below.
+- Writing articles (`.art-title`) use the same font-size/line-height as `.case-title`; subtitles (`.art-sub`) match `.case-desc`.
+
+## Mobile Nav
+
+Hamburger nav activates at ≤768px. The `<ul id="primary-nav">` slides down from `top: calc(60px + env(safe-area-inset-top))`. The toggle button uses `aria-expanded` with a bars-to-X CSS animation. Clicking any nav link or outside the drawer closes it.
+
 ## Case Study Page Pattern
 
-Each case study (`zuora.html`, `oracle.html`, `workspan.html`) follows an identical section sequence: hero → situation → role → decisions → outcome → case-nav footer.
+Each case study follows an identical section sequence: **hero → situation → role → decisions → outcome → case-nav footer**.
 
-**Decision item thumbnails** use a `.has-thumb` modifier class on `.decision-item` that shifts the CSS grid from `80px 1fr` to `80px 350px 1fr`. The thumbnail is a `<button class="decision-thumb" data-full="…">` that opens a fullscreen image modal on click. Mobile (≤768px) collapses to single-column.
+**Decision item thumbnails** use `.has-thumb` on `.decision-item`, shifting the grid from `80px 1fr` to `80px 350px 1fr`. The thumbnail is a `<button class="decision-thumb" data-full="…">` that opens a fullscreen modal. Mobile (≤768px) collapses to single-column.
 
-**Image modal** pattern: a fixed `<div class="image-modal" id="image-modal">` with open/close driven by `.open` class + `body.modal-open`. Close via × button, backdrop click, or Escape key. Modal HTML and JS are duplicated per page (no shared JS file).
+**Image modal**: fixed `<div class="image-modal" id="image-modal">`, toggled via `.open` class + `body.modal-open`. Closes via × button, backdrop click, or Escape. Modal HTML and JS are duplicated per page (no shared JS file).
 
-**Scroll reveal:** `IntersectionObserver` adds `.visible` to `.reveal` elements as they enter the viewport (staggered 60ms delay). Defined inline in each page's `<script>` block.
+**Role section image**: `.role-image-wrap` with a `::after` pseudo-element creates a 10px offset border effect. Zuora role image links to `occam.zuora.com`. Oracle and WorkSpan have no logo files — omit `.case-hero-logo` from those pages.
 
-**Role section image:** `.role-image-wrap` with a `::after` pseudo-element creates the offset border effect (10px offset, `var(--rule)` border).
+**Scroll reveal**: `IntersectionObserver` adds `.visible` to `.reveal` elements (staggered 60ms). Defined inline in each page's `<script>` block.
 
 ## Image Assets
 
-- `images/Zuora_Screens/` — Zuora product screenshots + Occam design system
-- `images/Responsys_oracle/` — Oracle/Responsys screenshots (mixed formats: png, webp, jpeg)
-- `images/Workspan/` — WorkSpan screenshots (all png, PascalCase filenames)
-- `images/zuora-logo.svg` — only logo file; Oracle and WorkSpan have no logos
+- `images/Zuora_Screens/` — Zuora screenshots + Occam design system (png)
+- `images/Responsys_oracle/` — Oracle/Responsys screenshots (mixed: png, webp, jpeg; **no avif** despite directory listing — use `.png`)
+- `images/Workspan/` — WorkSpan screenshots (all png, PascalCase filenames e.g. `Home.png`, `Table_View.png`)
+- `images/zuora-logo.svg` — only logo file
 
 ## Case-Nav Chain
 
-Homepage order matches the case-nav prev/next chain: Zuora → Oracle → WorkSpan. WorkSpan has no "next" link (right side hidden with `visibility:hidden`).
+Zuora → Oracle → WorkSpan. WorkSpan's right link is hidden with `visibility: hidden`. When adding a new case study, update both the new page's nav and its neighbour's nav.
 
-## Font Loading
+## iOS / Mobile
 
-Google Fonts loaded per-page (not in `styles.css`): `Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500` and `DM+Sans:wght@500;700`. All `font-weight` values in the codebase are ≥ 500.
+All pages include `viewport-fit=cover` in the viewport meta tag. The shared `nav` in `styles.css` uses `padding: env(safe-area-inset-top) var(--gutter) 0` to clear the notch/Dynamic Island. On non-notch devices `env(safe-area-inset-top)` resolves to `0` with no side effects.
