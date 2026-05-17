@@ -33,6 +33,28 @@
       transition: color 0.2s;
     }
     .back-link:hover { color: var(--accent); }
+    .case-hero-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+    .case-hero-logo {
+      height: 36px;
+      width: auto;
+      opacity: 0.55;
+      display: block;
+      filter: saturate(0.4);
+    }
+    .case-hero-brand-name {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.55;
+    }
     .case-hero-eyebrow {
       font-size: 0.72rem;
       font-weight: 500;
@@ -374,6 +396,10 @@
   <section class="case-hero">
     <div class="container">
       <a href="index.html#work" class="back-link">← All Work</a>
+      <div class="case-hero-brand">
+        <img src="images/Oracle.png" alt="Oracle" class="case-hero-logo" />
+        <span class="case-hero-brand-name">Oracle</span>
+      </div>
       <p class="case-hero-eyebrow">Sr. Director, User Experience &nbsp;·&nbsp; 2012 – 2018 &nbsp;·&nbsp; Redwood Shores, CA</p>
       <h1 class="case-hero-title">Building a <em>Unified Design Organization</em> Across Five Acquired Products</h1>
       <div class="case-stat-strip">
