@@ -33,13 +33,27 @@
       transition: color 0.2s;
     }
     .back-link:hover { color: var(--accent); }
+    .case-hero-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
     .case-hero-logo {
       height: 36px;
       width: auto;
       opacity: 0.55;
-      margin-bottom: 2rem;
       display: block;
       filter: saturate(0.4);
+    }
+    .case-hero-brand-name {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.55;
     }
     .case-hero-eyebrow {
       font-size: 0.72rem;
@@ -391,7 +405,10 @@
   <section class="case-hero">
     <div class="container">
       <a href="index.html#work" class="back-link">← All Work</a>
-      <img src="images/zuora-logo.svg" alt="Zuora" class="case-hero-logo" />
+      <div class="case-hero-brand">
+        <img src="images/zuora-logo.svg" alt="Zuora" class="case-hero-logo" />
+        <span class="case-hero-brand-name">Zuora</span>
+      </div>
       <p class="case-hero-eyebrow">Head of UX Design &amp; Research &nbsp;·&nbsp; 2021–Present &nbsp;·&nbsp; Redwood City, CA</p>
       <h1 class="case-hero-title">Building a <em>Design-First</em> Culture<br>from the Ground Up</h1>
       <div class="case-stat-strip">
