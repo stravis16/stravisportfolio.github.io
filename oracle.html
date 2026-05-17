@@ -348,7 +348,10 @@
       .decision-thumb { max-width: 360px; }
       .case-stat { padding-right: 1.5rem; margin-right: 1.5rem; }
       .outcome-metric { padding-right: 2rem; margin-right: 2rem; }
-      .case-nav-inner { flex-direction: column; text-align: center; gap: 1.5rem; }
+      .case-nav { padding: 1.5rem var(--gutter); }
+      .case-nav-inner { gap: 0.5rem; }
+      .case-nav-all-full { display: none; }
+      .case-nav-all-short { display: inline; }
     }
   </style>
 </head>
@@ -525,7 +528,7 @@
   <nav class="case-nav">
     <div class="case-nav-inner">
       <a href="zuora.html" class="case-nav-link">← Zuora</a>
-      <a href="index.html#work" class="case-nav-center">All Work</a>
+      <a href="index.html#work" class="case-nav-center"><span class="case-nav-all-full">All Work</span><span class="case-nav-all-short">All</span></a>
       <a href="workspan.html" class="case-nav-link">WorkSpan →</a>
     </div>
   </nav>
